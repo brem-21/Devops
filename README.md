@@ -112,20 +112,6 @@ The scripts use `s3api` for:
 - Consistent tagging strategy
 - Use of low-level s3api commands for better control
 
-## Troubleshooting
-
-- **Bucket already exists**: Bucket names must be globally unique across all AWS accounts
-- **Access denied**: Ensure your AWS credentials have S3 permissions
-- **Region errors**: Verify the regions in `.env` are valid AWS regions
-- **Script permissions**: Make sure the script is executable with `chmod +x`
-
-## Next Steps
-
-- Explore S3 bucket policies and permissions
-- Learn about S3 lifecycle management
-- Implement automated backup strategies
-- Study cross-region replication
-
 ## License
 
 MIT License - see [LICENSE](LICENSE) file for details.
