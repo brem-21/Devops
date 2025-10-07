@@ -17,7 +17,32 @@ Learn essential AWS CLI configuration, authentication, and multi-region S3 bucke
 
 ### S3 Bucket Deployment
 - `scripts/deploy-s3-buckets.sh` - Creates S3 buckets across multiple regions
+- `scripts/list-resources.sh` - Lists all S3 buckets with their regions in a formatted table
 - `scripts/.env` - Environment configuration for bucket naming and regions
+
+### List Resources Script Details
+
+The `list-resources.sh` script provides comprehensive bucket inventory management:
+
+**Key Features:**
+- Fetches all S3 buckets in your AWS account using `aws s3api list-buckets`
+- Displays bucket names and their corresponding regions in a formatted table
+- Handles the us-east-1 region special case (returns "None" but displays as "us-east-1")
+- Includes error handling for empty accounts and inaccessible buckets
+- Uses `printf` for consistent column formatting (40 chars for names, 20 for regions)
+
+**Usage:**
+```bash
+./scripts/list-resources.sh
+```
+
+**Output Format:**
+```
+Bucket Name                              Region
+------------                             --------
+my-bucket-us-east-1-123456              us-east-1
+my-bucket-eu-west-1-123456              eu-west-1
+```
 
 ### AWS CLI Commands Comparison
 
