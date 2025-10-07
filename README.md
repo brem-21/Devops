@@ -32,12 +32,14 @@ The scripts use `s3api` for:
 - Tagging support
 - Better error handling
 
+
 ## Images (Proof of Concept)
 
-- `images/aws-cli.png` - AWS CLI setup and configuration proof
-- `images/profiles.png` - Multi-profile configuration examples
-- `images/bucket-created.png` - S3 bucket creation confirmation
-- `images/cloud-bucket.png` - AWS Console bucket verification
+- ![AWS CLI setup and configuration proof](images/aws-cli.png) - AWS CLI setup and configuration proof
+- ![Multi-profile configuration examples](images/profiles.png) - Multi-profile configuration examples
+- ![S3 bucket creation confirmation](images/bucket-created.png) - S3 bucket creation confirmation
+- ![AWS Console bucket verification](images/cloud-bucket.png) - AWS Console bucket verification
+
 
 ## Regions Covered
 
