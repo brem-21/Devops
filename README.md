@@ -46,6 +46,8 @@ The scripts use `s3api` for:
 **AWS Console bucket verification** - AWS Management Console view confirming the buckets were successfully created and are visible in the S3 service dashboard. This validates that the CLI commands executed properly and the resources exist in your AWS account.
 ![AWS Console bucket verification](images/cloud-bucket.png)
 
+**Bucket list verification** - Command line output showing all created buckets listed using `aws s3 ls` command. This provides a quick way to verify all buckets across regions from the terminal without accessing the console.
+![bucket-list](images/bucket_list.png)
 
 ## Regions Covered
 
@@ -53,12 +55,51 @@ The scripts use `s3api` for:
 - eu-west-1 (Ireland)
 - ap-southeast-1 (Singapore)
 
+## Prerequisites
+
+- AWS Account with appropriate permissions
+- AWS CLI v2.x installed
+- Valid AWS credentials (Access Key ID and Secret Access Key)
+- Basic understanding of S3 and AWS regions
+
 ## Getting Started
 
 1. Install AWS CLI
 2. Configure your credentials and profiles
 3. Update `scripts/.env` with your preferences
-4. Run `./scripts/deploy-s3-buckets.sh` to create buckets
+4. Make the script executable: `chmod +x scripts/deploy-s3-buckets.sh`
+5. Run `./scripts/deploy-s3-buckets.sh` to create buckets
+
+## Key Features
+
+- **Multi-region deployment** - Automatically creates buckets across different AWS regions
+- **Versioning enabled** - All buckets have versioning turned on for data protection
+- **Proper tagging** - Buckets are tagged with environment and owner information
+- **Error handling** - Script includes proper error checking and validation
+- **Timestamped naming** - Unique bucket names with timestamp to avoid conflicts
+
+## Best Practices Demonstrated
+
+- Use of environment variables for configuration
+- Proper error handling with `set -e`
+- Region-specific bucket creation with LocationConstraint
+- Enabling versioning for data protection
+- Consistent tagging strategy
+- Use of low-level s3api commands for better control
+
+## Troubleshooting
+
+- **Bucket already exists**: Bucket names must be globally unique across all AWS accounts
+- **Access denied**: Ensure your AWS credentials have S3 permissions
+- **Region errors**: Verify the regions in `.env` are valid AWS regions
+- **Script permissions**: Make sure the script is executable with `chmod +x`
+
+## Next Steps
+
+- Explore S3 bucket policies and permissions
+- Learn about S3 lifecycle management
+- Implement automated backup strategies
+- Study cross-region replication
 
 ## License
 
