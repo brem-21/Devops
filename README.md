@@ -1,29 +1,56 @@
 # Week 1: AWS CLI Deployment
 
-This project demonstrates AWS CLI setup and deployment practices as part of an Devops learning curriculum.
+This project demonstrates AWS CLI setup and deployment practices as part of a DevOps learning curriculum.
 
 ## Overview
 
-Learn essential AWS CLI configuration, authentication, and resources deployment scripts in the cloud.
+Learn essential AWS CLI configuration, authentication, and multi-region S3 bucket deployment workflows for cloud-based operations.
 
 ## Contents
 
 - AWS CLI installation and configuration
 - Profile management for multiple environments
-- Basic deployment commands and best practices
+- Multi-region S3 bucket deployment scripts
+- Automated cleanup utilities
 - Visual guides and documentation
 
-## Images
+## Scripts
 
-- `images/aws-cli.png` - AWS CLI setup guide
-- `images/profiles.png` - Profile configuration examples
+### S3 Bucket Deployment
+- `scripts/deploy-s3-buckets.sh` - Creates S3 buckets across multiple regions
+- `scripts/.env` - Environment configuration for bucket naming and regions
+
+### AWS CLI Commands Comparison
+
+**s3api vs s3 mb:**
+- `aws s3api create-bucket` - Low-level API with full control over bucket configuration
+- `aws s3 mb` - High-level command for simple bucket creation
+
+The scripts use `s3api` for:
+- Region-specific LocationConstraint configuration
+- Versioning enablement
+- Tagging support
+- Better error handling
+
+## Images (Proof of Concept)
+
+- `images/aws-cli.png` - AWS CLI setup and configuration proof
+- `images/profiles.png` - Multi-profile configuration examples
+- `images/bucket-created.png` - S3 bucket creation confirmation
+- `images/cloud-bucket.png` - AWS Console bucket verification
+
+## Regions Covered
+
+- us-east-1 (N. Virginia)
+- eu-west-1 (Ireland)
+- ap-southeast-1 (Singapore)
 
 ## Getting Started
 
 1. Install AWS CLI
-2. Configure your credentials
-3. Set up profiles for different environments
-4. Test basic deployment commands
+2. Configure your credentials and profiles
+3. Update `scripts/.env` with your preferences
+4. Run `./scripts/deploy-s3-buckets.sh` to create buckets
 
 ## License
 
