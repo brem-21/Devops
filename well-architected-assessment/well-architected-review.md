@@ -32,12 +32,10 @@ Traffic Flow (as shown in the diagram):
 ### **Risks**
 - Limited or no mention of monitoring and alerting (e.g., CloudWatch, alarms).
 - No clear CI/CD or automated deployment process.
-- Lack of operational runbooks or incident response plans.
 
 ### **Improvements**
 - Implement **CloudWatch metrics, logs, and alarms** for EC2, RDS, ALB, and NAT Gateway.
 - Automate deployments using **CodePipeline**, **Terraform**, or **CloudFormation**.
-- Create **runbooks and escalation procedures** for incident handling.
 - Enable **AWS Config** for continuous compliance monitoring.
 
 ---
@@ -63,7 +61,7 @@ Traffic Flow (as shown in the diagram):
 
 ---
 
-## ⚙️ Pillar 3: Reliability
+## Pillar 3: Reliability
 
 ### **Current State** (Architecture Design)
 - Multi-AZ deployment provides redundancy for EC2 and RDS as shown in the diagram.
