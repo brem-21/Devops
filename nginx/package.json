@@ -1,0 +1,16 @@
+{
+    "name": "nginx-crash-course",
+    "version": "1.0.0",
+    "description": "A crash course on Nginx web server, with static html file",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "author": "Your Name",
+    "license": "MIT",
+    
+    "dependencies": {
+        "express": "^4.17.1",
+        "path": "^0.12.7"
+    }
+}
