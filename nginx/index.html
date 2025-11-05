@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User-Friendly Demo Website</title>
+  <meta name="description" content="A modern, accessible single-page website with HTML, CSS, and JavaScript." />
+  <style>
+    /* ================
+       Base Reset
+    ==================*/
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; font-family: "Inter", system-ui, sans-serif; line-height: 1.5; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; }
+
+    /* ================
+       Theme Variables
+    ==================*/
+    :root {
+      --bg: #f9fafb;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --accent2: #06b6d4;
+      --radius: 12px;
+      --shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+      --max-width: 1100px;
+      --gap: 1rem;
+    }
+    :root.dark {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --shadow: 0 4px 18px rgba(255, 255, 255, 0.05);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .container {
+      width: calc(100% - 2rem);
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+
+    /* ================
+       Header
+    ==================*/
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+    }
+    nav a:hover { color: var(--accent2); }
+    .btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+    .btn:hover { background: var(--accent2); }
+
+    /* Dark mode toggle */
+    #themeToggle {
+      width: 40px; height: 22px; background: var(--muted);
+      border-radius: 999px; position: relative;
+    }
+    #dot {
+      position: absolute; top: 2px; left: 2px;
+      width: 18px; height: 18px;
+      background: #fff; border-radius: 50%;
+      transition: transform 0.3s;
+    }
+    :root.dark #dot { transform: translateX(18px); }
+
+    /* ================
+       Hero Section
+    ==================*/
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      align-items: center;
+      padding-top: 2rem;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin-bottom: 0.75rem;
+    }
+    .hero p {
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+    }
+    .hero .actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ================
+       Features
+    ==================*/
+    .features {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .feature {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .feature span {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ================
+       Contact Form
+    ==================*/
+    form {
+      display: grid;
+      gap: 0.75rem;
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-top: 2rem;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.6rem;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      background: transparent;
+      color: var(--text);
+    }
+    textarea { resize: vertical; min-height: 80px; }
+    .error { color: #dc2626; font-size: 0.85rem; }
+
+    /* ================
+       Modal
+    ==================*/
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      place-items: center;
+    }
+    .modal {
+      background: var(--card);
+      color: var(--text);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      max-width: 400px;
+      width: 90%;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    /* ================
+       Footer
+    ==================*/
+    footer {
+      text-align: center;
+      color: var(--muted);
+      margin-top: 2rem;
+      padding: 1rem 0;
+    }
+
+    @media(min-width:768px) {
+      .hero { grid-template-columns: 1fr 1fr; text-align: left; }
+      .hero .actions { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="navbar container">
+      <div class="logo">MyWebsite</div>
+      <nav>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><button id="openModal" class="btn">Try Demo</button></li>
+          <li><div id="themeToggle" role="button" tabindex="0"><div id="dot"></div></div></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero container">
+    <div>
+      <h1>Build beautiful, fast websites easily</h1>
+      <p>Modern, responsive, and user-friendly — all in a single HTML file. Toggle dark mode, try the demo, and send a message below!</p>
+      <div class="actions">
+        <button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Started</button>
+        <button class="btn" style="background: var(--accent2);" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">Learn More</button>
+      </div>
+    </div>
+    <div>
+      <img src="images/download.jpeg" alt="Laptop illustration">
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="container">
+    <h2 style="text-align:center;">Features</h2>
+    <div class="features">
+      <div class="feature"><span>⚡</span><h3>Fast & Lightweight</h3><p class="muted">Loads instantly and runs smoothly on any device.</p></div>
+      <div class="feature"><span>🌙</span><h3>Dark Mode</h3><p class="muted">Switch themes easily to match your style or environment.</p></div>
+      <div class="feature"><span>📱</span><h3>Responsive Design</h3><p class="muted">Perfect layout on phones, tablets, and desktops.</p></div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="container">
+    <h2 style="text-align:center;">Contact Us</h2>
+    <form id="contactForm" novalidate>
+      <div>
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" required placeholder="Jane Doe" />
+        <div class="error" id="err-name"></div>
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required placeholder="you@example.com" />
+        <div class="error" id="err-email"></div>
+      </div>
+      <div>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required placeholder="Your message here..."></textarea>
+        <div class="error" id="err-message"></div>
+      </div>
+      <button type="submit" class="btn">Send</button>
+      <p id="form-status"></p>
+    </form>
+  </section>
+
+  <!-- Modal -->
+  <div id="modalBackdrop" class="modal-backdrop">
+    <div class="modal">
+      <h3>Welcome to the Demo!</h3>
+      <p>This is an example modal window. Click outside or press ESC to close.</p>
+      <button class="btn" id="closeModal">Close</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>© <span id="year"></span> MyWebsite. All rights reserved.</footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Current Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Theme Toggle
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    toggle.addEventListener('click', () => {
+      root.classList.toggle('dark');
+      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    });
+    if (localStorage.getItem('theme') === 'dark') root.classList.add('dark');
+
+    // Modal
+    const openModal = document.getElementById('openModal');
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const closeModal = document.getElementById('closeModal');
+
+    openModal.onclick = () => modalBackdrop.style.display = 'grid';
+    closeModal.onclick = () => modalBackdrop.style.display = 'none';
+    window.addEventListener('click', e => {
+      if (e.target === modalBackdrop) modalBackdrop.style.display = 'none';
+    });
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape') modalBackdrop.style.display = 'none';
+    });
+
+    // Contact Form
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      let valid = true;
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const message = form.message.value.trim();
+      const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+      const err = id => document.getElementById('err-' + id);
+
+      err('name').textContent = name ? '' : 'Please enter your name.';
+      err('email').textContent = email && emailPattern.test(email) ? '' : 'Please enter a valid email.';
+      err('message').textContent = message ? '' : 'Please enter your message.';
+      valid = name && emailPattern.test(email) && message;
+
+      const status = document.getElementById('form-status');
+      if (!valid) {
+        status.style.color = '#dc2626';
+        status.textContent = 'Please fix errors above.';
+        return;
+      }
+
+      status.style.color = 'green';
+      status.textContent = 'Message sent successfully!';
+      form.reset();
+    });
+  </script>
+</body>
+</html>
