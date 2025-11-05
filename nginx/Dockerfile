@@ -1,11 +1,11 @@
-From node:14
+FROM node:14
 
-workdir /app
+WORKDIR /app
 
 COPY server.js . 
 COPY index.html . 
 COPY images/ ./images
-COPY packages.json .
+COPY package.json .
 
 RUN npm install
 
