@@ -1,0 +1,25 @@
+services:
+  windows:
+    image: dockurr/windows
+    container_name: windows
+    environment:
+      VERSION: "11"
+      RAM_SIZE: "8G"
+      CPU_CORES: "4"
+      DISK_SIZE: "64G"
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "8006:8006"    # web viewer (VNC-like, in-browser)
+      - "3390:3389/tcp" # RDP
+      - "3390:3389/udp"
+    volumes:
+      - ./storage:/storage
+      - ./data:/shared
+      - /home/brempong/Documents/Telekom/gitlab/bepart-2.0/v2:/shared/v2
+      - /home/brempong/Documents/Telekom/gitlab/bepart-2.0/output/model:/shared/v2/model
+    restart: unless-stopped
+    stop_grace_period: 2m
